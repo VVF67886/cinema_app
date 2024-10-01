@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using CinemaApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<CinemaContext>(x => x.UseSqlServer("Server=.\\SQLEXPRESS;initial catalog=Cinema;user id=sa;password=sa;TrustServerCertificate=true", options => options.EnableRetryOnFailure()));
 
 // Add services to the container.
 
