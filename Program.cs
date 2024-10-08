@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using CinemaApi.Models;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,15 @@ var app = builder.Build();
 	app.UseSwagger();
 	app.UseSwaggerUI();
 }
+
+app.UseStaticFiles(); // For the wwwroot folder
+
+app.UseStaticFiles(new StaticFileOptions()
+{
+	FileProvider = new PhysicalFileProvider(
+						Path.Combine(Directory.GetCurrentDirectory(), @"images_cinemapp")),
+	RequestPath = new PathString("/images_cinemapp")
+});
 
 app.UseHttpsRedirection();
 
